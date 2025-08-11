@@ -1,5 +1,4 @@
 
-
 // hämta input fält
 const descInput = document.getElementById("desc");
 const amountInput = document.getElementById("amount");
@@ -22,7 +21,7 @@ let expenses = [];
 
 // funktion för transaktion
 function addTransaction(type) {
-  let description = descInput.value;  // UTAN trim!
+  let description = descInput.value;  
   let amount = Number(amountInput.value);
 
   if (description !== "" && amount > 0) {
