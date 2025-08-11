@@ -1,4 +1,4 @@
-
+//NYTEST
 // hämta input fält
 const descInput = document.getElementById("desc");
 const amountInput = document.getElementById("amount");
