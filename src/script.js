@@ -1,66 +1,52 @@
 
 
 // hämta input fält
+const descInput = document.getElementById("desc");
+const amountInput = document.getElementById("amount");
 
-const descInput = document.getElementById("desc")
-const amountInput = document.getElementById("amount")
+// Knappar
+const incomeBtn = document.getElementById("incomeBtn");
+const expenseBtn = document.getElementById("expenseBtn");
 
-//Knappar
-
-const incomeBtn = document.getElementById("incomeBtn")
-const expenseBtn = document.getElementById("expenseBtn")
-
-//Listor
-const incomeList = document.getElementById("incomeList")
-const expenseList = document.getElementById("expenseList")
-const transactionList = document.getElementById("transactionList")
+// Listor
+const incomeList = document.getElementById("incomeList");
+const expenseList = document.getElementById("expenseList");
+const transactionList = document.getElementById("transactionList");
 
 // saldo
-const balanceDisplay = document.getElementById("balance")
-
+const balanceDisplay = document.getElementById("balance");
 
 // 2 arrayer
 let incomes = [];
 let expenses = [];
 
-//funktion för transaktion
+// funktion för transaktion
 function addTransaction(type) {
-    let description = descInput.value;
-    let amount = Number(amountInput.value);
+  let description = descInput.value;  // UTAN trim!
+  let amount = Number(amountInput.value);
 
-    if (description !== "" && amount > 0) {
-        let transaction = { description: description, amount: amount, type: type };
+  if (description !== "" && amount > 0) {
+    let transaction = { description: description, amount: amount, type: type };
 
-        if (type === "income"){
-        incomes.push(transaction);
-        let li = document.createElement("li");
-        li.textContent = `${description} + ${amount} kr`;
-        incomeList.appendChild(li);
-        } 
-        
-        else {
-            expenses.push(transaction);
-            let li = document.createElement("li");
-            li.textContent = `${description} - ${amount} kr`;
-            expenseList.appendChild(li);
-
-        }
-//Lägg till i transaktionslistan
-let liTrans = document.createElement("li");
-    liTrans.textContent = `${type.toUpperCase()}: ${description} (${amount} kr)`;
-    transactionList.appendChild(liTrans);
-
-
-//uppdatera saldo
-updateBalance();
-
-
-//Rensa inputs
- descInput.value = "";
- amountInput.value = "";
-
-
+    if (type === "income") {
+      incomes.push(transaction);
+      let li = document.createElement("li");
+      li.textContent = `${description} - ${amount} kr (Inkomst)`;
+      incomeList.appendChild(li);
+    } else {
+      expenses.push(transaction);
+      let li = document.createElement("li");
+      li.textContent = `${description} - ${amount} kr (Utgift)`;
+      expenseList.appendChild(li);
     }
+
+    // uppdatera saldo
+    updateBalance();
+
+    // Rensa inputs
+    descInput.value = "";
+    amountInput.value = "";
+  }
 }
 
 // Funktion för att uppdatera saldo
@@ -76,17 +62,13 @@ function updateBalance() {
   }
 
   let balance = totalIncome - totalExpense;
-    balanceDisplay.textContent = balance;
-
+  balanceDisplay.textContent = balance.toString();
 }
-
 
 // Event listeners för knappar
-incomeBtn.addEventListener("click", function() {
+incomeBtn.addEventListener("click", function () {
   addTransaction("income");
-}
-);
-expenseBtn.addEventListener("click", function() {
+});
+expenseBtn.addEventListener("click", function () {
   addTransaction("expense");
-}
-);
+});
